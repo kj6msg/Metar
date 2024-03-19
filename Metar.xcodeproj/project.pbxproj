@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		94EA28612B9D141A00767FA1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA28602B9D141A00767FA1 /* main.swift */; };
+		94597DBB2B9E7A55002C6541 /* MetarJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597DBA2B9E7A55002C6541 /* MetarJSON.swift */; };
+		94CF45372BA7B127004EA004 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CF45362BA7B127004EA004 /* Temperature.swift */; };
+		94EA28682B9D143300767FA1 /* Metar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA28672B9D143300767FA1 /* Metar.swift */; };
+		94EA286A2B9D186000767FA1 /* MetarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA28692B9D186000767FA1 /* MetarApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +26,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9433E1902B9FD27E004EC1CC /* Metar.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Metar.entitlements; sourceTree = "<group>"; };
+		94597DBA2B9E7A55002C6541 /* MetarJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetarJSON.swift; sourceTree = "<group>"; };
+		94CF45362BA7B127004EA004 /* Temperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
 		94EA285D2B9D141A00767FA1 /* Metar */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Metar; sourceTree = BUILT_PRODUCTS_DIR; };
-		94EA28602B9D141A00767FA1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		94EA28672B9D143300767FA1 /* Metar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metar.swift; sourceTree = "<group>"; };
+		94EA28692B9D186000767FA1 /* MetarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetarApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +64,11 @@
 		94EA285F2B9D141A00767FA1 /* Metar */ = {
 			isa = PBXGroup;
 			children = (
-				94EA28602B9D141A00767FA1 /* main.swift */,
+				9433E1902B9FD27E004EC1CC /* Metar.entitlements */,
+				94EA28672B9D143300767FA1 /* Metar.swift */,
+				94597DBA2B9E7A55002C6541 /* MetarJSON.swift */,
+				94EA28692B9D186000767FA1 /* MetarApp.swift */,
+				94CF45362BA7B127004EA004 /* Temperature.swift */,
 			);
 			path = Metar;
 			sourceTree = "<group>";
@@ -120,7 +131,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94EA28612B9D141A00767FA1 /* main.swift in Sources */,
+				94597DBB2B9E7A55002C6541 /* MetarJSON.swift in Sources */,
+				94EA28682B9D143300767FA1 /* Metar.swift in Sources */,
+				94CF45372BA7B127004EA004 /* Temperature.swift in Sources */,
+				94EA286A2B9D186000767FA1 /* MetarApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,7 +262,12 @@
 		94EA28652B9D141A00767FA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Metar/Metar.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WP957Y9Q92;
+				ENABLE_APP_SANDBOX = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = kj6msg.Metar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -257,7 +276,12 @@
 		94EA28662B9D141A00767FA1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Metar/Metar.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WP957Y9Q92;
+				ENABLE_APP_SANDBOX = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = kj6msg.Metar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
