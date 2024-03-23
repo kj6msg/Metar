@@ -134,35 +134,51 @@ struct Metar: CustomStringConvertible
             return nil
         }
         
-        var str = ""
+        guard let windSpeed = metarJSON.windSpeed else
+        {
+            return nil
+        }
+        
+        if windSpeed == 0
+        {
+            return "calm"
+        }
+        
+        var windString = ""
         
         switch(windDirection)
         {
         case .int(let degrees):
-            str += "\(degrees)°".leftPadding(toLength: 4, withPad: "0")
+            let compassPoints = ["N", "NNE", "NE", "ENE", "E", "ESE","SE", "SSE", "S", "SSW", "SW",
+                                 "WSW", "W", "WNW", "NW", "NNW", "N"]
+            let index = Int((Double(degrees) / 22.5) + 0.5)
+            windString += "from the " + compassPoints[index]
+                        + String(format: " (%03d degrees)", degrees)
             
-        case .string(let variable):
-            str += variable
+        case .string:
+            windString += "variable direction"
         }
         
-        if let windSpeed = metarJSON.windSpeed
+        func mph(_ knots: Int) -> Double
         {
-            if windSpeed == 0
-            {
-                str += "calm"
-            }
-            else
-            {
-                str += " at \(windSpeed) knots"
-                
-                if let windGust = metarJSON.windGust
-                {
-                    str += " gusting to \(windGust) knots"
-                }
-            }
+            Double(knots) * 1.15078
         }
         
-        return str
+        func mps(_ knots: Int) -> Double
+        {
+            Double(knots) * 0.514444
+        }
+
+        windString += String(format: " at %.0f MPH (%d knots; %.1f m/s)",
+                             mph(windSpeed), windSpeed, mps(windSpeed))
+                
+        if let windGust = metarJSON.windGust
+        {
+            windString += String(format: " gusting to %.0f MPH (%d knots; %.1f m/s)",
+                                 mph(windGust), windGust, mps(windGust))
+        }
+        
+        return windString
     }
     
     private var visibility: String?
