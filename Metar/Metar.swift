@@ -188,19 +188,21 @@ struct Metar: CustomStringConvertible
             return nil
         }
         
-        var str = ""
+        var visibilityString = ""
         
         switch(visibility)
         {
-        case .double(let double):
-            let sm = double.formatted(.number.precision(.fractionLength(0)))
-            let km = (double * 1.60934).formatted(.number.precision(.fractionLength(0)))
-            str += "\(sm) sm (\(km) km)"
+        case .double(let statuteMiles):
+            let fractionLength = (statuteMiles.truncatingRemainder(dividingBy: 1) == 0) ? 0 : 2
+            let formattedSM = statuteMiles.formatted(.number.precision(.fractionLength(fractionLength)))
+            let formattedKM = (statuteMiles * 1.60934).formatted(.number.precision(.fractionLength(fractionLength)))
+            visibilityString += "\(formattedSM) sm (\(formattedKM) km)"
+            
         case .string:
-            str += "10 or more sm (16+ km)"
+            visibilityString += "10 or more sm (16+ km)"
         }
         
-        return str
+        return visibilityString
     }
 }
 
