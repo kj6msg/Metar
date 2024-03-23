@@ -57,7 +57,7 @@ struct Metar: CustomStringConvertible
         
         // observation time
         decodedMETAR += "Conditions at: ".leftPadding(toLength: 22, withPad: " ")
-        decodedMETAR += "\(metarJSON.observationTime.description)\n"
+        decodedMETAR += "\(observationTime)\n"
         
         // temperature
         decodedMETAR += "Temperature: ".leftPadding(toLength: 22, withPad: " ")
@@ -92,6 +92,14 @@ struct Metar: CustomStringConvertible
         }
 
         return decodedMETAR
+    }
+    
+    private var observationTime: String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HHmm 'UTC' dd MMM yyyy"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        return dateFormatter.string(from: metarJSON.observationTime)
     }
     
     private var dewPointAndRelativeHumidity: String?
