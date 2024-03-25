@@ -24,6 +24,7 @@ struct MetarJSON: Decodable
     var metarType: String = ""
     var rawObservation: String = ""
     var siteName: String = ""
+    var clouds: [CloudLayer] = []
     
     enum CodingKeys: String, CodingKey
     {
@@ -42,6 +43,7 @@ struct MetarJSON: Decodable
         case metarType
         case rawObservation = "rawOb"
         case siteName = "name"
+        case clouds
     }
     
     enum IntOrString: Decodable
@@ -96,5 +98,11 @@ struct MetarJSON: Decodable
         {
             case unableToDecodeDoubleOrString
         }
+    }
+    
+    struct CloudLayer: Decodable
+    {
+        var cover: String
+        var base: Int?
     }
 }

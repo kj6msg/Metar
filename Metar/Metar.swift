@@ -13,7 +13,7 @@ struct Metar: CustomStringConvertible
     private static let addsURL = "https://aviationweather.gov/api/data/metar"
     
     let station: String
-    private var metarJSON: MetarJSON = MetarJSON()
+    private var metarJSON = MetarJSON()
     
     init(station: String)
     {
@@ -90,7 +90,17 @@ struct Metar: CustomStringConvertible
             decodedMETAR += "Visibility: ".leftPadding(toLength: 22, withPad: " ")
             decodedMETAR += "\(visibility)\n"
         }
-
+        
+        // ceiling and clouds
+        if let (ceiling, clouds) = ceilingAndClouds
+        {
+            decodedMETAR += "Ceiling: ".leftPadding(toLength: 22, withPad: " ")
+            decodedMETAR += "\(ceiling)\n"
+            
+            decodedMETAR += "Clouds: ".leftPadding(toLength: 22, withPad: " ")
+            decodedMETAR += "\(clouds)\n"
+        }
+        
         return decodedMETAR
     }
     
@@ -211,6 +221,74 @@ struct Metar: CustomStringConvertible
         }
         
         return visibilityString
+    }
+    
+    private var ceilingAndClouds: (String, String)?
+    {
+        let clouds = metarJSON.clouds
+        
+        if clouds.isEmpty
+        {
+            return nil
+        }
+        
+        // determine ceiling
+        var ceiling = ""
+        let layers = clouds.filter { $0.cover == "BKN" || $0.cover == "OVC" }
+        
+        if let lowestLayer = (layers.min { $0.base! < $1.base! })
+        {
+            ceiling = "\(lowestLayer.base!) feet AGL"
+        }
+        else if (clouds.contains { $0.cover == "CAVOK" })
+        {
+            return ("ceiling and visiblity are OK", "unknown")
+        }
+        else if (clouds.contains { $0.cover == "OVX" })
+        {
+            ceiling = "indefinite ceiling"
+            
+            if let vv = metarJSON.verticalVisibility
+            {
+                ceiling += " with vertical visibility of \(vv) feet AGL"
+            }
+            
+            return (ceiling, "obscured sky")
+        }
+        else
+        {
+            ceiling = "at least 12,000 feet AGL"
+        }
+        
+        // determine cloud cover
+        var cloudCover: [String] = []
+        
+        coverLoop: for cloud in clouds
+        {            
+            switch cloud.cover
+            {
+            case "CLR":
+                cloudCover = ["sky clear below 12,000 feet AGL"]
+                break coverLoop
+            
+            case "FEW":
+                cloudCover.append("few clouds at \(cloud.base!) feet AGL")
+                
+            case "SCT":
+                cloudCover.append("scattered clouds at \(cloud.base!) feet AGL")
+                
+            case "BKN":
+                cloudCover.append("broken clouds at \(cloud.base!) feet AGL")
+                
+            case "OVC":
+                cloudCover.append("overcast cloud deck at \(cloud.base!) feet AGL")
+                
+            default:
+                break
+            }
+        }
+        
+        return (ceiling, cloudCover.joined(separator: ", "))
     }
 }
 
