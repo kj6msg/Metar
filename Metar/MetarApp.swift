@@ -56,12 +56,3 @@ struct MetarApp: AsyncParsableCommand
         }
     }
 }
-
-extension String
-{
-    var containsOnlyLetters: Bool
-    {
-        let notLetters = NSCharacterSet.letters.inverted
-        return rangeOfCharacter(from: notLetters, options: String.CompareOptions.literal) == nil
-    }
-}

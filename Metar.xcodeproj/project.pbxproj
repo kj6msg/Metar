@@ -12,6 +12,7 @@
 		94D5035C2BB24CBE0029DD6E /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 94D5035B2BB24CBE0029DD6E /* ArgumentParser */; };
 		94EA28682B9D143300767FA1 /* Metar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA28672B9D143300767FA1 /* Metar.swift */; };
 		94EA286A2B9D186000767FA1 /* MetarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA28692B9D186000767FA1 /* MetarApp.swift */; };
+		94FB3DD12BB75CCD005553BA /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB3DD02BB75CCD005553BA /* String+Additions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,7 @@
 		94EA285D2B9D141A00767FA1 /* Metar */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Metar; sourceTree = BUILT_PRODUCTS_DIR; };
 		94EA28672B9D143300767FA1 /* Metar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metar.swift; sourceTree = "<group>"; };
 		94EA28692B9D186000767FA1 /* MetarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetarApp.swift; sourceTree = "<group>"; };
+		94FB3DD02BB75CCD005553BA /* String+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Additions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				94597DBA2B9E7A55002C6541 /* MetarJSON.swift */,
 				94EA28692B9D186000767FA1 /* MetarApp.swift */,
 				94CF45362BA7B127004EA004 /* Temperature.swift */,
+				94FB3DD02BB75CCD005553BA /* String+Additions.swift */,
 			);
 			path = Metar;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94597DBB2B9E7A55002C6541 /* MetarJSON.swift in Sources */,
+				94FB3DD12BB75CCD005553BA /* String+Additions.swift in Sources */,
 				94EA28682B9D143300767FA1 /* Metar.swift in Sources */,
 				94CF45372BA7B127004EA004 /* Temperature.swift in Sources */,
 				94EA286A2B9D186000767FA1 /* MetarApp.swift in Sources */,

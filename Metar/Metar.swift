@@ -291,20 +291,3 @@ struct Metar: CustomStringConvertible
         return (ceiling, cloudCover.joined(separator: ", "))
     }
 }
-
-extension String
-{
-    func leftPadding(toLength newLength: Int, withPad padCharacter: Character) -> String
-    {
-        if self.count < newLength
-        {
-            let n = newLength - self.count
-            return String(repeating: padCharacter, count: n) + self
-        }
-        else
-        {
-            return String(self.suffix(newLength))
-        }
-    }
-}
-
