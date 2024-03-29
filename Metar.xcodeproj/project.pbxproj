@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		94597DBB2B9E7A55002C6541 /* MetarJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597DBA2B9E7A55002C6541 /* MetarJSON.swift */; };
 		94CF45372BA7B127004EA004 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CF45362BA7B127004EA004 /* Temperature.swift */; };
+		94D5035C2BB24CBE0029DD6E /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 94D5035B2BB24CBE0029DD6E /* ArgumentParser */; };
 		94EA28682B9D143300767FA1 /* Metar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA28672B9D143300767FA1 /* Metar.swift */; };
 		94EA286A2B9D186000767FA1 /* MetarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA28692B9D186000767FA1 /* MetarApp.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94D5035C2BB24CBE0029DD6E /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +91,9 @@
 			dependencies = (
 			);
 			name = Metar;
+			packageProductDependencies = (
+				94D5035B2BB24CBE0029DD6E /* ArgumentParser */,
+			);
 			productName = Metar;
 			productReference = 94EA285D2B9D141A00767FA1 /* Metar */;
 			productType = "com.apple.product-type.tool";
@@ -117,6 +122,9 @@
 				Base,
 			);
 			mainGroup = 94EA28542B9D141A00767FA1;
+			packageReferences = (
+				94D5035A2BB24CBE0029DD6E /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = 94EA285E2B9D141A00767FA1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -309,6 +317,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		94D5035A2BB24CBE0029DD6E /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		94D5035B2BB24CBE0029DD6E /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94D5035A2BB24CBE0029DD6E /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 94EA28552B9D141A00767FA1 /* Project object */;
 }
