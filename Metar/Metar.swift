@@ -10,7 +10,7 @@ import Accelerate
 
 struct Metar: CustomStringConvertible
 {
-    private static let addsURL = "https://aviationweather.gov/api/data/metar"
+    private static let awcURL = "https://aviationweather.gov/api/data/metar"
     
     let station: String
     private var metarJSON = MetarJSON()
@@ -22,7 +22,7 @@ struct Metar: CustomStringConvertible
     
     mutating func fetch() async throws
     {
-        var urlComponents = URLComponents(string: Metar.addsURL)!
+        var urlComponents = URLComponents(string: Metar.awcURL)!
         urlComponents.queryItems = [
             URLQueryItem(name: "ids", value: station),
             URLQueryItem(name: "format", value: "json")
