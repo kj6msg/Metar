@@ -12,11 +12,10 @@ import ArgumentParser
 struct MetarApp: AsyncParsableCommand
 {
     static var configuration = CommandConfiguration(
+        commandName: "Metar",
         abstract: "Fetches a METAR observation.",
-        usage: """
-            Metar [--decoded] <icao>
-            """,
-        discussion: "Prints a METAR observation in either raw or decoded format."
+        discussion: "Prints a METAR observation in either raw or decoded format.",
+        version: "1.0"
     )
     
     @Flag(help: "Print decoded observation.")
@@ -35,24 +34,19 @@ struct MetarApp: AsyncParsableCommand
     
     mutating func run() async throws
     {
-        var metar = Metar(station: icao)
-        
-        do
+        guard let metar = try? await Metar(station: icao) else
         {
-            try await metar.fetch()
-            
-            if(decoded)
-            {
-                print(metar.decoded)
-            }
-            else
-            {
-                print(metar)
-            }
+            print("Error: Unable to fetch METAR.")
+            throw ExitCode.failure
         }
-        catch
+        
+        if(decoded)
         {
-            print("Unexpected error: \(error).")
+            print(metar.decoded)
+        }
+        else
+        {
+            print(metar)
         }
     }
 }

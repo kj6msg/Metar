@@ -15,28 +15,36 @@ struct Metar: CustomStringConvertible
     let station: String
     private var metarJSON = MetarJSON()
     
-    init(station: String)
+    init(station: String) async throws
     {
         self.station = station
+        try await update()
     }
     
-    mutating func fetch() async throws
+    mutating func update() async throws
     {
         var urlComponents = URLComponents(string: Metar.awcURL)!
         urlComponents.queryItems = [
             URLQueryItem(name: "ids", value: station),
             URLQueryItem(name: "format", value: "json")
         ]
-        
         let (httpData, _) = try await URLSession.shared.data(from: urlComponents.url!)
+        
         let jsonDecoder = JSONDecoder()
         jsonDecoder.dateDecodingStrategy = .secondsSince1970
         let jsonData = try jsonDecoder.decode([MetarJSON].self, from: httpData)
         
-        if !jsonData.isEmpty
+        if jsonData.isEmpty
         {
-            metarJSON = jsonData.first!
+            throw MetarError.emptyMETAR
         }
+        
+        metarJSON = jsonData.first!
+    }
+    
+    enum MetarError: Error
+    {
+        case emptyMETAR
     }
     
     var description: String
